@@ -5,6 +5,96 @@
     <title>Canvas Game</title>
   </head>
   <body>
-
+    <canvas id="canvas" width="510" height="480"></canvas>
+    <script type="text/javascript">
+      var canvas = document.getElementById('canvas');
+      var ctx = canvas.getContext('2d');
+​
+      //keeps track of monster position
+      var monsterXTrack = 50;
+      var monsterYTrack = 50;
+​
+      //monster's speed
+      var monsterSpeed = 25;
+​
+      //tracks turns
+      var turn = 0;
+​
+      //hero's starting position
+      var heroX = 245;
+      var heroY = 230;
+​
+      //hero's speed
+      var speed = 10;
+​
+      window.addEventListener('keydown', function(event) {
+        var key = event.keyCode;
+        if (key === 37) {
+          heroX -= speed;
+        }
+        if (key === 39) {
+          heroX += speed;
+        }
+        if (key === 38) {
+          heroY -= speed;
+        }
+        if (key === 40) {
+          heroY += speed;
+        }
+​
+      });
+​
+      function main() {
+​
+        //displays and refreshes background image
+        ctx.beginPath();
+        var background = new Image();
+        background.src = 'images/background.png';
+          ctx.drawImage(background, 0, 0);
+​
+        //displayes image of hero
+        ctx.beginPath();
+        var heroImage = new Image();
+        heroImage.src = 'images/hero.png';
+        ctx.drawImage(heroImage, heroX, heroY);
+        //wraps hero around background edges
+        if(heroX > 510) {
+          heroX = 1;
+        } else if (heroX < 1) {
+          heroX = 510;
+        }
+        if(heroY > 480) {
+          heroY = 1;
+        } else if (heroY < 1) {
+          heroY = 480;
+        }heroY
+​
+        //put monster on the board
+        ctx.beginPath();
+        var monsterImage = new Image();
+        monsterImage.src = 'images/monster.png';
+        ctx.drawImage(monsterImage, monsterXTrack, monsterYTrack);
+​
+        turn++;
+        //debugger
+        if (turn % 50 === 0) {
+          var turnArray = ['left', 'right', 'up', 'down'];
+          for (var i = 0; i < turnArray.length; i++) {
+            var direction = turnArray[Math.floor(Math.random() * turnArray.length)];
+          }
+          if (direction === 'left') {
+            monsterXTrack -= monsterSpeed;
+          } else if (direction === 'right') {
+            monsterXTrack += monsterSpeed;
+          } else if (direction === 'up') {
+            monsterYTrack -= monsterSpeed;
+          } else if (direction === 'down') {
+            monsterYTrack += monsterSpeed;
+          }
+        }
+​
+      requestAnimationFrame(main);
+      }
+      main();
+    </script>
   </body>
-</html>
