@@ -9,24 +9,24 @@
     <script type="text/javascript">
       var canvas = document.getElementById('canvas');
       var ctx = canvas.getContext('2d');
-​
+
       //keeps track of monster position
       var monsterXTrack = 50;
       var monsterYTrack = 50;
-​
+
       //monster's speed
       var monsterSpeed = 25;
-​
+
       //tracks turns
       var turn = 0;
-​
+
       //hero's starting position
       var heroX = 245;
       var heroY = 230;
-​
+
       //hero's speed
       var speed = 10;
-​
+
       window.addEventListener('keydown', function(event) {
         var key = event.keyCode;
         if (key === 37) {
@@ -41,17 +41,17 @@
         if (key === 40) {
           heroY += speed;
         }
-​
+
       });
-​
+
       function main() {
-​
+
         //displays and refreshes background image
         ctx.beginPath();
         var background = new Image();
         background.src = 'images/background.png';
           ctx.drawImage(background, 0, 0);
-​
+
         //displayes image of hero
         ctx.beginPath();
         var heroImage = new Image();
@@ -68,13 +68,13 @@
         } else if (heroY < 1) {
           heroY = 480;
         }heroY
-​
+
         //put monster on the board
         ctx.beginPath();
         var monsterImage = new Image();
         monsterImage.src = 'images/monster.png';
         ctx.drawImage(monsterImage, monsterXTrack, monsterYTrack);
-​
+
         turn++;
         //debugger
         if (turn % 50 === 0) {
@@ -92,9 +92,10 @@
             monsterYTrack += monsterSpeed;
           }
         }
-​
+
       requestAnimationFrame(main);
       }
       main();
     </script>
   </body>
+</html>
