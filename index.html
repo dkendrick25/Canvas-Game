@@ -15,10 +15,13 @@
       var monsterYTrack = 50;
 
       //monster's speed
-      var monsterSpeed = 25;
+      var monsterSpeed = 75;
 
       //tracks turns
       var turn = 0;
+
+      //track score
+      var score = 0;
 
       //hero's starting position
       var heroX = 245;
@@ -67,13 +70,25 @@
           heroY = 1;
         } else if (heroY < 1) {
           heroY = 480;
-        }heroY
+        }
 
         //put monster on the board
         ctx.beginPath();
         var monsterImage = new Image();
         monsterImage.src = 'images/monster.png';
         ctx.drawImage(monsterImage, monsterXTrack, monsterYTrack);
+        //wrap the monster
+        if(monsterXTrack > 510) {
+          monsterXTrack = 1;
+        } else if (monsterXTrack < 1) {
+          monsterXTrack = 510;
+        }
+        if(monsterYTrack > 480) {
+          monsterYTrack = 1;
+        } else if (monsterYTrack < 1) {
+          monsterYTrack = 480;
+        }
+
 
         turn++;
         //debugger
