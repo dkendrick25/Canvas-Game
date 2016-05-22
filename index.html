@@ -48,12 +48,14 @@
       });
 
       function main() {
-
         //displays and refreshes background image
         ctx.beginPath();
         var background = new Image();
         background.src = 'images/background.png';
           ctx.drawImage(background, 0, 0);
+          ctx.font = "16px sans-serif";
+          ctx.fillStyle  = "white";
+          ctx.fillText("Score: "+ score, 35, 45)
 
         //displayes image of hero
         ctx.beginPath();
@@ -106,6 +108,13 @@
           } else if (direction === 'down') {
             monsterYTrack += monsterSpeed;
           }
+        }
+        // updates score if hero catches monster
+        if (!((heroX + 32 < monsterXTrack) || (monsterXTrack + 32 < heroX) || (heroY + 32 < monsterYTrack) || (monsterYTrack + 32 < heroY))) {
+          score++;
+          //move the monster to a random location
+          monsterXTrack = Math.floor(Math.random() * 200);
+          monsterYTrack = Math.floor(Math.random() * 200);
         }
 
       requestAnimationFrame(main);
