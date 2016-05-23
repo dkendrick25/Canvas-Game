@@ -1,188 +1,193 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Canvas Game</title>
-  </head>
-  <body>
-    <canvas id="canvas" width="510" height="480"></canvas>
-    <script type="text/javascript">
-      var canvas = document.getElementById('canvas');
-      var ctx = canvas.getContext('2d');
+<head>
+  <meta charset="utf-8">
+  <title>Canvas Game</title>
+</head>
+<body>
+  <canvas id="canvas" width="510" height="480"></canvas>
+  <script type="text/javascript">
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
 
-      //keeps track on goblin1 position
-      var goblin1x = 200;
-      var goblin1y = 200;
+  //keeps track on goblin1 position
+  var goblin1x = 200;
+  var goblin1y = 200;
 
-      var goblin2x = 350;
-      var goblin2y = 300;
-      var goblinSpeed = 3;
-      //keeps track of monster position
-      var monsterXTrack = 50;
-      var monsterYTrack = 50;
+  var goblin2x = 350;
+  var goblin2y = 300;
+  var goblinSpeed = 3;
+  //keeps track of monster position
+  var monsterXTrack = 50;
+  var monsterYTrack = 50;
 
-      //monster's speed
-      var monsterSpeed = 100;
+  //monster's speed
+  var monsterSpeed = 100;
 
-      //tracks turns
-      var turn = 0;
+  //tracks turns
+  var turn = 0;
 
-      //track score
-      var score = 0;
-      var highScore = 0;
-      //hero's starting position
-      var heroX = 245;
-      var heroY = 230;
+  //track score
+  var score = 0;
+  var highScore = 0;
+  //hero's starting position
+  var heroX = 245;
+  var heroY = 230;
 
-      //hero's speed
-      var speed = 10;
+  //hero's speed
+  var speed = 10;
 
-      window.addEventListener('keydown', function(event) {
-        var key = event.keyCode;
-        if (key === 37) {
-          heroX -= speed;
-        }
-        if (key === 39) {
-          heroX += speed;
-        }
-        if (key === 38) {
-          heroY -= speed;
-        }
-        if (key === 40) {
-          heroY += speed;
-        }
+  window.addEventListener('keydown', function(event) {
+    var key = event.keyCode;
+    if (key === 37) {
+      heroX -= speed;
+    }
+    if (key === 39) {
+      heroX += speed;
+    }
+    if (key === 38) {
+      heroY -= speed;
+    }
+    if (key === 40) {
+      heroY += speed;
+    }
 
-      });
+  });
 
-      function main() {
-        //displays and refreshes background image
-        ctx.beginPath();
-        var background = new Image();
-        background.src = 'images/background.png';
-          ctx.drawImage(background, 0, 0);
-          ctx.font = "16px sans-serif";
-          ctx.fillStyle  = "white";
-          ctx.fillText("Score: "+ score, 35, 45);
-          ctx.font = "16px sans-serif";
-          ctx.fillStyle  = "white";
-          ctx.fillText("High Score: "+ highScore, 35, 65)
+  function main() {
+    //displays and refreshes background image
+    ctx.beginPath();
+    var background = new Image();
+    background.src = 'images/background.png';
+    ctx.drawImage(background, 0, 0);
+    ctx.font = "16px sans-serif";
+    ctx.fillStyle  = "white";
+    ctx.fillText("Score: "+ score, 35, 45);
+    ctx.font = "16px sans-serif";
+    ctx.fillStyle  = "white";
+    ctx.fillText("High Score: "+ highScore, 35, 65)
 
-        //displayes image of hero
-        ctx.beginPath();
-        var heroImage = new Image();
-        heroImage.src = 'images/hero.png';
-        ctx.drawImage(heroImage, heroX, heroY);
-        //wraps hero around background edges
-        if(heroX > 510) {
-          heroX = 1;
-        } else if (heroX < 1) {
-          heroX = 510;
-        }
-        if(heroY > 480) {
-          heroY = 1;
-        } else if (heroY < 1) {
-          heroY = 480;
-        }
+    //displayes image of hero
+    ctx.beginPath();
+    var heroImage = new Image();
+    heroImage.src = 'images/hero.png';
+    ctx.drawImage(heroImage, heroX, heroY);
+    //wraps hero around background edges
+    if(heroX > 510) {
+      heroX = 1;
+    } else if (heroX < 1) {
+      heroX = 510;
+    }
+    if(heroY > 480) {
+      heroY = 1;
+    } else if (heroY < 1) {
+      heroY = 480;
+    }
 
-        //put monster on the board
-        ctx.beginPath();
-        var monsterImage = new Image();
-        monsterImage.src = 'images/monster.png';
-        ctx.drawImage(monsterImage, monsterXTrack, monsterYTrack);
-        //wrap the monster
-        if(monsterXTrack > 510) {
-          monsterXTrack = 1;
-        } else if (monsterXTrack < 1) {
-          monsterXTrack = 510;
-        }
-        if(monsterYTrack > 480) {
-          monsterYTrack = 1;
-        } else if (monsterYTrack < 1) {
-          monsterYTrack = 480;
-        }
-        //adding goblin
-        ctx.beginPath();
-        var goblin1 = new Image();
-        goblin1.src = 'images/goblin.png';
-        ctx.drawImage(goblin1, goblin1x, goblin1y);
-        if(goblin1x > 510) {
-          goblin1x = 1;
-        } else if (goblin1x < 1) {
-          goblin1x = 510;
-        }
-        if(goblin1y > 480) {
-          goblin1y = 1;
-        } else if (goblin1y < 1) {
-          goblin1y = 480;
-        }
+    //put monster on the board
+    ctx.beginPath();
+    var monsterImage = new Image();
+    monsterImage.src = 'images/monster.png';
+    ctx.drawImage(monsterImage, monsterXTrack, monsterYTrack);
+    //wrap the monster
+    if(monsterXTrack > 510) {
+      monsterXTrack = 1;
+    } else if (monsterXTrack < 1) {
+      monsterXTrack = 510;
+    }
+    if(monsterYTrack > 480) {
+      monsterYTrack = 1;
+    } else if (monsterYTrack < 1) {
+      monsterYTrack = 480;
+    }
+    //adding goblin
+    ctx.beginPath();
+    var goblin1 = new Image();
+    goblin1.src = 'images/goblin.png';
+    ctx.drawImage(goblin1, goblin1x, goblin1y);
+    if(goblin1x > 510) {
+      goblin1x = 1;
+    } else if (goblin1x < 1) {
+      goblin1x = 510;
+    }
+    if(goblin1y > 480) {
+      goblin1y = 1;
+    } else if (goblin1y < 1) {
+      goblin1y = 480;
+    }
 
-        //adding goblin
-        ctx.beginPath();
-        var goblin2 = new Image();
-        goblin2.src = 'images/goblin.png';
-        ctx.drawImage(goblin2, goblin2x, goblin2y);
-        if(goblin2x > 510) {
-          goblin2x = 1;
-        } else if (goblin2x < 1) {
-          goblin2x = 510;
-        }
-        if(goblin2y > 480) {
-          goblin2y = 1;
-        } else if (goblin2y < 1) {
-          goblin2y = 480;
-        }
+    //adding goblin
+    ctx.beginPath();
+    var goblin2 = new Image();
+    goblin2.src = 'images/goblin.png';
+    ctx.drawImage(goblin2, goblin2x, goblin2y);
+    if(goblin2x > 510) {
+      goblin2x = 1;
+    } else if (goblin2x < 1) {
+      goblin2x = 510;
+    }
+    if(goblin2y > 480) {
+      goblin2y = 1;
+    } else if (goblin2y < 1) {
+      goblin2y = 480;
+    }
 
-        turn++;
-        //debugger
-        if (turn % 50 === 0) {
-          var turnArray = ['left', 'right', 'up', 'down'];
-          for (var i = 0; i < turnArray.length; i++) {
-            var direction = turnArray[Math.floor(Math.random() * turnArray.length)];
-          }
-          if (direction === 'left') {
-            monsterXTrack -= monsterSpeed;
-          } else if (direction === 'right') {
-            monsterXTrack += monsterSpeed;
-          } else if (direction === 'up') {
-            monsterYTrack -= monsterSpeed;
-          } else if (direction === 'down') {
-            monsterYTrack += monsterSpeed;
-          }
-          //moving goblin 1 randomly
-          if (direction === 'left') {
-            goblin1x -= goblinSpeed;
-          } else if (direction === 'right') {
-            goblin1x += goblinSpeed;
-          } else if (direction === 'up') {
-            goblin1y -= goblinSpeed;
-          } else if (direction === 'down') {
-            goblin1y += goblinSpeed;
-          }
-          //moving goblin2 randomly
-          if (direction === 'left') {
-            goblin2x -= goblinSpeed;
-          } else if (direction === 'right') {
-            goblin2x += goblinSpeed;
-          } else if (direction === 'up') {
-            goblin2y -= goblinSpeed;
-          } else if (direction === 'down') {
-            goblin2y += goblinSpeed;
-          }
-        }
-        // updates score if hero catches monster
-        if (!((heroX + 32 < monsterXTrack) || (monsterXTrack + 32 < heroX) || (heroY + 32 < monsterYTrack) || (monsterYTrack + 32 < heroY))) {
-          score++;
-          if (score > highScore) {
-            highScore = score;
-          }
-          //move the monster to a random location
-          monsterXTrack = Math.floor(Math.random() * 200);
-          monsterYTrack = Math.floor(Math.random() * 200);
-        }
-
-      requestAnimationFrame(main);
+    turn++;
+    //debugger
+    if (turn % 50 === 0) {
+      var turnArray = ['left', 'right', 'up', 'down'];
+      for (var i = 0; i < turnArray.length; i++) {
+        var direction = turnArray[Math.floor(Math.random() * turnArray.length)];
       }
-      main();
-    </script>
-  </body>
+      if (direction === 'left') {
+        monsterXTrack -= monsterSpeed;
+      } else if (direction === 'right') {
+        monsterXTrack += monsterSpeed;
+      } else if (direction === 'up') {
+        monsterYTrack -= monsterSpeed;
+      } else if (direction === 'down') {
+        monsterYTrack += monsterSpeed;
+      }
+      //moving goblin 1 randomly
+      if (direction === 'left') {
+        goblin1x += goblinSpeed;
+      } else if (direction === 'right') {
+        goblin1x -= goblinSpeed;
+      } else if (direction === 'up') {
+        goblin1y += goblinSpeed;
+      } else if (direction === 'down') {
+        goblin1y -= goblinSpeed;
+      }
+      //moving goblin2 randomly
+      if (direction === 'left') {
+        goblin2x -= goblinSpeed;
+      } else if (direction === 'right') {
+        goblin2x += goblinSpeed;
+      } else if (direction === 'up') {
+        goblin2y -= goblinSpeed;
+      } else if (direction === 'down') {
+        goblin2y += goblinSpeed;
+      }
+    }
+    // updates score if hero catches monster
+    if (!((heroX + 32 < monsterXTrack) || (monsterXTrack + 32 < heroX) || (heroY + 32 < monsterYTrack) || (monsterYTrack + 32 < heroY))) {
+      score++;
+      if (score > highScore) {
+        highScore = score;
+      }
+      //move the monster to a random location
+      monsterXTrack = Math.floor(Math.random() * 200);
+      monsterYTrack = Math.floor(Math.random() * 200);
+    }
+    // if hit by goblin 1 ... you lose
+    if (!((heroX + 32 < goblin1x) || (goblin1x + 32 < heroX) || (heroY + 32 < goblin1y) || (goblin1y + 32 < heroY))) {
+      alert("OH NO! A goblin got you ... GAME OVER");
+      goblin1x = Math.floor(Math.random() * 200);
+      goblin1y = Math.floor(Math.random() * 200);
+    }
+    requestAnimationFrame(main);
+  }
+  main();
+  </script>
+</body>
 </html>
