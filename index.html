@@ -35,25 +35,28 @@
   //track score
   var score = 0;
   var highScore = 0;
+
   //hero's starting position
   var heroX = 245;
   var heroY = 230;
-
+  var heroDirX = 1;
+  var heroDirY = 0;
   //hero's speed
   var heroSpeed = 10;
 
   window.addEventListener('keydown', function(event) {
     var key = event.keyCode;
     if (key === 37) { //left
+      heroDirX = -1;
       heroX -= heroSpeed;
-    }
-    if (key === 39) { //right
+    } else if (key === 39) { //right
       heroX += heroSpeed;
-    }
-    if (key === 38) { //up
+      heroDirX = 1;
+    } else if (key === 38) { //up
+      heroDirY = -1;
       heroY -= heroSpeed;
-    }
-    if (key === 40) { //down
+    } else if (key === 40) { //down
+      heroDirY = 1;
       heroY += heroSpeed;
     }
 
