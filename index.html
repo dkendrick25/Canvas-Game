@@ -10,12 +10,19 @@
       var canvas = document.getElementById('canvas');
       var ctx = canvas.getContext('2d');
 
+      //keeps track on goblin1 position
+      var goblin1x = 200;
+      var goblin1y = 200;
+
+      var goblin2x = 350;
+      var goblin2y = 300;
+      var golbinspeed = 5;
       //keeps track of monster position
       var monsterXTrack = 50;
       var monsterYTrack = 50;
 
       //monster's speed
-      var monsterSpeed = 75;
+      var monsterSpeed = 100;
 
       //tracks turns
       var turn = 0;
@@ -90,7 +97,17 @@
         } else if (monsterYTrack < 1) {
           monsterYTrack = 480;
         }
+        //adding goblin
+        ctx.beginPath();
+        var goblin1 = new Image();
+        goblin1.src = 'images/goblin.png';
+        ctx.drawImage(goblin1, goblin1x, goblin1y);
 
+        //adding goblin
+        ctx.beginPath();
+        var goblin2 = new Image();
+        goblin2.src = 'images/goblin.png';
+        ctx.drawImage(goblin2, goblin2x, goblin2y);
 
         turn++;
         //debugger
