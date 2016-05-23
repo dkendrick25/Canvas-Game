@@ -181,9 +181,17 @@
     }
     // if hit by goblin 1 ... you lose
     if (!((heroX + 32 < goblin1x) || (goblin1x + 32 < heroX) || (heroY + 32 < goblin1y) || (goblin1y + 32 < heroY))) {
-      alert("OH NO! A goblin got you ... GAME OVER");
+      alert("OH NO! You've been captured by a goblin!!");
       goblin1x = Math.floor(Math.random() * 200);
       goblin1y = Math.floor(Math.random() * 200);
+      score = 0;
+    }
+    // if hit by goblin 2 ... you lose
+    if (!((heroX + 32 < goblin2x) || (goblin2x + 32 < heroX) || (heroY + 32 < goblin2y) || (goblin2y + 32 < heroY))) {
+      alert("OH NO! You've been captured by a goblin!!");
+      goblin2x = Math.floor(Math.random() * 200);
+      goblin2y = Math.floor(Math.random() * 200);
+      score = 0;
     }
     requestAnimationFrame(main);
   }
