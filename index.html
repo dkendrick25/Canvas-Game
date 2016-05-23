@@ -105,12 +105,32 @@
         var goblin1 = new Image();
         goblin1.src = 'images/goblin.png';
         ctx.drawImage(goblin1, goblin1x, goblin1y);
+        if(goblin1x > 510) {
+          goblin1x = 1;
+        } else if (goblin1x < 1) {
+          goblin1x = 510;
+        }
+        if(goblin1y > 480) {
+          goblin1y = 1;
+        } else if (goblin1y < 1) {
+          goblin1y = 480;
+        }
 
         //adding goblin
         ctx.beginPath();
         var goblin2 = new Image();
         goblin2.src = 'images/goblin.png';
         ctx.drawImage(goblin2, goblin2x, goblin2y);
+        if(goblin2x > 510) {
+          goblin2x = 1;
+        } else if (goblin2x < 1) {
+          goblin2x = 510;
+        }
+        if(goblin2y > 480) {
+          goblin2y = 1;
+        } else if (goblin2y < 1) {
+          goblin2y = 480;
+        }
 
         turn++;
         //debugger
@@ -127,7 +147,7 @@
             monsterYTrack -= monsterSpeed;
           } else if (direction === 'down') {
             monsterYTrack += monsterSpeed;
-          }
+          } 
         }
         // updates score if hero catches monster
         if (!((heroX + 32 < monsterXTrack) || (monsterXTrack + 32 < heroX) || (heroY + 32 < monsterYTrack) || (monsterYTrack + 32 < heroY))) {
