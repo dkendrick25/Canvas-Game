@@ -159,6 +159,7 @@
     // updates score if hero catches monster
     if (collison(monster)) {
       score++;
+      //randomly move the monster
       monster.x = Math.random() * 512;
       monster.y = Math.random() * 480;
       if (score > highScore) {
@@ -168,6 +169,7 @@
     // if hit by goblin 1 or 2... you lose
     if (collison(goblin1 || goblin2)) {
       score = 0;
+      //radomly move the hero away from the goblins
       hero.x = Math.floor(Math.random() * 400);
       hero.y = Math.floor(Math.random() * 400);
     }
