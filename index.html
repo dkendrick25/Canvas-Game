@@ -16,7 +16,7 @@
 
       var goblin2x = 350;
       var goblin2y = 300;
-      var golbinspeed = 5;
+      var goblinSpeed = 3;
       //keeps track of monster position
       var monsterXTrack = 50;
       var monsterYTrack = 50;
@@ -147,7 +147,27 @@
             monsterYTrack -= monsterSpeed;
           } else if (direction === 'down') {
             monsterYTrack += monsterSpeed;
-          } 
+          }
+          //moving goblin 1 randomly
+          if (direction === 'left') {
+            goblin1x -= goblinSpeed;
+          } else if (direction === 'right') {
+            goblin1x += goblinSpeed;
+          } else if (direction === 'up') {
+            goblin1y -= goblinSpeed;
+          } else if (direction === 'down') {
+            goblin1y += goblinSpeed;
+          }
+          //moving goblin2 randomly
+          if (direction === 'left') {
+            goblin2x -= goblinSpeed;
+          } else if (direction === 'right') {
+            goblin2x += goblinSpeed;
+          } else if (direction === 'up') {
+            goblin2y -= goblinSpeed;
+          } else if (direction === 'down') {
+            goblin2y += goblinSpeed;
+          }
         }
         // updates score if hero catches monster
         if (!((heroX + 32 < monsterXTrack) || (monsterXTrack + 32 < heroX) || (heroY + 32 < monsterYTrack) || (monsterYTrack + 32 < heroY))) {
