@@ -29,7 +29,7 @@
 
       //track score
       var score = 0;
-
+      var highScore = 0;
       //hero's starting position
       var heroX = 245;
       var heroY = 230;
@@ -62,7 +62,10 @@
           ctx.drawImage(background, 0, 0);
           ctx.font = "16px sans-serif";
           ctx.fillStyle  = "white";
-          ctx.fillText("Score: "+ score, 35, 45)
+          ctx.fillText("Score: "+ score, 35, 45);
+          ctx.font = "16px sans-serif";
+          ctx.fillStyle  = "white";
+          ctx.fillText("High Score: "+ highScore, 35, 65)
 
         //displayes image of hero
         ctx.beginPath();
@@ -129,6 +132,9 @@
         // updates score if hero catches monster
         if (!((heroX + 32 < monsterXTrack) || (monsterXTrack + 32 < heroX) || (heroY + 32 < monsterYTrack) || (monsterYTrack + 32 < heroY))) {
           score++;
+          if (score > highScore) {
+            highScore = score;
+          }
           //move the monster to a random location
           monsterXTrack = Math.floor(Math.random() * 200);
           monsterYTrack = Math.floor(Math.random() * 200);
