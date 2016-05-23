@@ -16,7 +16,7 @@
 
   var goblin2x = 350;
   var goblin2y = 300;
-  var goblinSpeed = 3;
+  var goblinSpeed = 2;
   //keeps track of monster position
   var monsterXTrack = 50;
   var monsterYTrack = 50;
@@ -188,7 +188,7 @@
     }
     // if hit by goblin 2 ... you lose
     if (!((heroX + 32 < goblin2x) || (goblin2x + 32 < heroX) || (heroY + 32 < goblin2y) || (goblin2y + 32 < heroY))) {
-      alert("OH NO! You've been captured by a goblin!!");
+      alert("OH NO! You've been captured by a Goblin!!");
       goblin2x = Math.floor(Math.random() * 200);
       goblin2y = Math.floor(Math.random() * 200);
       score = 0;
