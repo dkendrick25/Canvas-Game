@@ -3,6 +3,15 @@
 <head>
   <meta charset="utf-8">
   <title>Canvas Game</title>
+  <style>
+    * {
+      margin: 10px;
+      padding: 0;
+      text-align: center;
+      color: gray;
+      font-family: Helvetica, sans-serif;
+    }
+  </style>
 </head>
 <body>
   <canvas id="canvas" width="510" height="480"></canvas>
@@ -11,7 +20,7 @@
   var ctx = canvas.getContext('2d');
 
   //keeps track on goblin1 position
-  var goblin1x = 200;
+  var goblin1x = 400;
   var goblin1y = 200;
   var goblin1DirX = 1;
   var goblin1DirY = 0;
@@ -79,10 +88,8 @@
     ctx.drawImage(background, 0, 0);
     ctx.font = "16px sans-serif";
     ctx.fillStyle  = "white";
-    ctx.fillText("Score: "+ score, 35, 45);
-    ctx.font = "16px sans-serif";
-    ctx.fillStyle  = "white";
-    ctx.fillText("High Score: "+ highScore, 35, 65)
+    ctx.fillText("Score: " + score, 35, 45);
+    ctx.fillText("High Score: " + highScore, 35, 65)
 
     //displayes image of hero
     ctx.beginPath();
@@ -93,13 +100,13 @@
     heroY += heroDirY * heroSpeed;
     //wraps hero around background edges
     if(heroX > 510) {
-      heroX = 1;
-    } else if (heroX < 1) {
+      heroX = 0;
+    } else if (heroX < 0) {
       heroX = 510;
     }
     if(heroY > 480) {
-      heroY = 1;
-    } else if (heroY < 1) {
+      heroY = 0;
+    } else if (heroY < 0) {
       heroY = 480;
     }
 
@@ -110,13 +117,13 @@
     ctx.drawImage(monsterImage, monsterXTrack, monsterYTrack);
     //wrap the monster
     if(monsterXTrack > 510) {
-      monsterXTrack = 1;
-    } else if (monsterXTrack < 1) {
+      monsterXTrack = 0;
+    } else if (monsterXTrack < 0) {
       monsterXTrack = 510;
     }
     if(monsterYTrack > 480) {
-      monsterYTrack = 1;
-    } else if (monsterYTrack < 1) {
+      monsterYTrack = 0;
+    } else if (monsterYTrack < 0) {
       monsterYTrack = 480;
     }
     //adding goblin
@@ -125,13 +132,13 @@
     goblin1.src = 'images/goblin.png';
     ctx.drawImage(goblin1, goblin1x, goblin1y);
     if(goblin1x > 510) {
-      goblin1x = 1;
-    } else if (goblin1x < 1) {
+      goblin1x = 0;
+    } else if (goblin1x < 0) {
       goblin1x = 510;
     }
     if(goblin1y > 480) {
-      goblin1y = 1;
-    } else if (goblin1y < 1) {
+      goblin1y = 0;
+    } else if (goblin1y < 0) {
       goblin1y = 480;
     }
 
