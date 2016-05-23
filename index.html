@@ -13,17 +13,22 @@
   //keeps track on goblin1 position
   var goblin1x = 200;
   var goblin1y = 200;
+  var goblin1DirX = 1;
+  var goblin1DirY = 0;
 
   var goblin2x = 350;
   var goblin2y = 300;
   var goblinSpeed = 2;
+  var goblin2DirX = 1;
+  var goblin2DirY = -1;
   //keeps track of monster position
   var monsterXTrack = 50;
   var monsterYTrack = 50;
 
   //monster's speed
-  var monsterSpeed = 100;
-
+  var monsterSpeed = 5;
+  var monsterDirX = 1;
+  var monsterDirY = 0;
   //tracks turns
   var turn = 0;
 
@@ -35,21 +40,21 @@
   var heroY = 230;
 
   //hero's speed
-  var speed = 10;
+  var heroSpeed = 10;
 
   window.addEventListener('keydown', function(event) {
     var key = event.keyCode;
-    if (key === 37) {
-      heroX -= speed;
+    if (key === 37) { //left
+      heroX -= heroSpeed;
     }
-    if (key === 39) {
-      heroX += speed;
+    if (key === 39) { //right
+      heroX += heroSpeed;
     }
-    if (key === 38) {
-      heroY -= speed;
+    if (key === 38) { //up
+      heroY -= heroSpeed;
     }
-    if (key === 40) {
-      heroY += speed;
+    if (key === 40) { //down
+      heroY += heroSpeed;
     }
 
   });
@@ -135,39 +140,18 @@
     turn++;
     //debugger
     if (turn % 50 === 0) {
-      var turnArray = ['left', 'right', 'up', 'down'];
-      for (var i = 0; i < turnArray.length; i++) {
-        var direction = turnArray[Math.floor(Math.random() * turnArray.length)];
-      }
-      if (direction === 'left') {
-        monsterXTrack -= monsterSpeed;
-      } else if (direction === 'right') {
-        monsterXTrack += monsterSpeed;
-      } else if (direction === 'up') {
-        monsterYTrack -= monsterSpeed;
-      } else if (direction === 'down') {
-        monsterYTrack += monsterSpeed;
-      }
-      //moving goblin 1 randomly
-      if (direction === 'left') {
-        goblin1x += goblinSpeed;
-      } else if (direction === 'right') {
-        goblin1x -= goblinSpeed;
-      } else if (direction === 'up') {
-        goblin1y += goblinSpeed;
-      } else if (direction === 'down') {
-        goblin1y -= goblinSpeed;
-      }
-      //moving goblin2 randomly
-      if (direction === 'left') {
-        goblin2x -= goblinSpeed;
-      } else if (direction === 'right') {
-        goblin2x += goblinSpeed;
-      } else if (direction === 'up') {
-        goblin2y -= goblinSpeed;
-      } else if (direction === 'down') {
-        goblin2y += goblinSpeed;
-      }
+      monsterDirX = Math.floor(Math.random() * 3) - 1;
+      monsterDirY = Math.floor(Math.random() * 3) - 1;
+      //randomly changes monster direction
+      monsterXTrack += monsterDirX * monsterSpeed;
+      monsterYTrack += monsterDirY + monsterSpeed;
+      //randomly changes goblin 1 diretion
+      goblin1x += goblin1DirX * goblinSpeed;
+      goblin1y += goblin1DirY + goblinSpeed;
+      //randomly changes goblin 2 direction
+      goblin2x += goblin1DirX * goblinSpeed;
+      goblin2y += goblin2DirY + goblinSpeed;
+
     }
     // updates score if hero catches monster
     if (!((heroX + 32 < monsterXTrack) || (monsterXTrack + 32 < heroX) || (heroY + 32 < monsterYTrack) || (monsterYTrack + 32 < heroY))) {
@@ -181,7 +165,7 @@
     }
     // if hit by goblin 1 ... you lose
     if (!((heroX + 32 < goblin1x) || (goblin1x + 32 < heroX) || (heroY + 32 < goblin1y) || (goblin1y + 32 < heroY))) {
-      alert("OH NO! You've been captured by a goblin!!");
+      alert("OH NO! You've been captured by a Goblin!!");
       goblin1x = Math.floor(Math.random() * 200);
       goblin1y = Math.floor(Math.random() * 200);
       score = 0;
