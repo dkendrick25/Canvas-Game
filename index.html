@@ -19,14 +19,14 @@
   var goblin2x = 350;
   var goblin2y = 300;
   var goblinSpeed = 2;
-  var goblin2DirX = 1;
+  var goblin2DirX = 0;
   var goblin2DirY = -1;
   //keeps track of monster position
   var monsterXTrack = 50;
   var monsterYTrack = 50;
 
   //monster's speed
-  var monsterSpeed = 5;
+  var monsterSpeed = 2;
   var monsterDirX = 1;
   var monsterDirY = 0;
   //tracks turns
@@ -39,26 +39,35 @@
   //hero's starting position
   var heroX = 245;
   var heroY = 230;
-  var heroDirX = 1;
+  var heroDirX = 0;
   var heroDirY = 0;
   //hero's speed
-  var heroSpeed = 10;
+  var heroSpeed = 5;
 
   window.addEventListener('keydown', function(event) {
     var key = event.keyCode;
     if (key === 37) { //left
       heroDirX = -1;
-      heroX -= heroSpeed;
     } else if (key === 39) { //right
-      heroX += heroSpeed;
       heroDirX = 1;
     } else if (key === 38) { //up
       heroDirY = -1;
-      heroY -= heroSpeed;
     } else if (key === 40) { //down
       heroDirY = 1;
-      heroY += heroSpeed;
     }
+  });
+
+    window.addEventListener('keyup', function(event) {
+      var key = event.keyCode;
+      if (key === 37) { //left
+        heroDirX = 0;
+      } else if (key === 39) { //right
+        heroDirX = 0;
+      } else if (key === 38) { //up
+        heroDirY = 0;
+      } else if (key === 40) { //down
+        heroDirY = 0;
+      }
 
   });
 
@@ -80,6 +89,8 @@
     var heroImage = new Image();
     heroImage.src = 'images/hero.png';
     ctx.drawImage(heroImage, heroX, heroY);
+    heroX += heroDirX * heroSpeed;
+    heroY += heroDirY * heroSpeed;
     //wraps hero around background edges
     if(heroX > 510) {
       heroX = 1;
@@ -139,22 +150,28 @@
     } else if (goblin2y < 1) {
       goblin2y = 480;
     }
+    //randomly changes monster direction
+    monsterXTrack += monsterDirX * monsterSpeed;
+    monsterYTrack += monsterDirY + monsterSpeed;
+    //randomly changes goblin 1 diretion
+    goblin1x += goblin1DirX * goblinSpeed;
+    goblin1y += goblin1DirY + goblinSpeed;
+    //randomly changes goblin 2 direction
+    goblin2x += goblin1DirX * goblinSpeed;
+    goblin2y += goblin2DirY + goblinSpeed;
+
 
     turn++;
     //debugger
     if (turn % 50 === 0) {
+      //change monster direction randomly
       monsterDirX = Math.floor(Math.random() * 3) - 1;
       monsterDirY = Math.floor(Math.random() * 3) - 1;
-      //randomly changes monster direction
-      monsterXTrack += monsterDirX * monsterSpeed;
-      monsterYTrack += monsterDirY + monsterSpeed;
-      //randomly changes goblin 1 diretion
-      goblin1x += goblin1DirX * goblinSpeed;
-      goblin1y += goblin1DirY + goblinSpeed;
-      //randomly changes goblin 2 direction
-      goblin2x += goblin1DirX * goblinSpeed;
-      goblin2y += goblin2DirY + goblinSpeed;
-
+      //change goblin direction randomly
+      goblin1DirX = Math.floor(Math.random() * 3) - 1;
+      goblin1DirY = Math.floor(Math.random() * 3) - 1;
+      goblin2DirX = Math.floor(Math.random() * 3) - 1;
+      goblin2DirY = Math.floor(Math.random() * 3) - 1;
     }
     // updates score if hero catches monster
     if (!((heroX + 32 < monsterXTrack) || (monsterXTrack + 32 < heroX) || (heroY + 32 < monsterYTrack) || (monsterYTrack + 32 < heroY))) {
@@ -163,14 +180,14 @@
         highScore = score;
       }
       //move the monster to a random location
-      monsterXTrack = Math.floor(Math.random() * 200);
-      monsterYTrack = Math.floor(Math.random() * 200);
+      monsterXTrack = Math.floor(Math.random() * 400);
+      monsterYTrack = Math.floor(Math.random() * 400);
     }
     // if hit by goblin 1 ... you lose
     if (!((heroX + 32 < goblin1x) || (goblin1x + 32 < heroX) || (heroY + 32 < goblin1y) || (goblin1y + 32 < heroY))) {
       alert("OH NO! You've been captured by a Goblin!!");
-      goblin1x = Math.floor(Math.random() * 200);
-      goblin1y = Math.floor(Math.random() * 200);
+      goblin1x = Math.floor(Math.random() * 400);
+      goblin1y = Math.floor(Math.random() * 400);
       score = 0;
     }
     // if hit by goblin 2 ... you lose
