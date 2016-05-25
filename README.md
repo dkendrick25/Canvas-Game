@@ -1,3 +1,3 @@
 This is a game using HTML canvas
 
-[Check it out here](http://kendrickgoblingame.surge.sh/)
+[Check it out here](http://kendrickcanvasgame.surge.sh/)
