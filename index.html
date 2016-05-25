@@ -14,8 +14,8 @@
   </style>
 </head>
 <body>
-  <h1>Goblin Game.</h1>
-  <h5>Move around using the arrow keys and catch the Zombie but watch out for<em>GOBLINS!</em></h5>
+  <h1>Yoshi Game.</h1>
+  <h5>Move around using the arrow keys and catch Yoshi's egg but watch out for<em>BOO!</em></h5>
   <canvas id="canvas" width="510" height="480"></canvas>
   <script type="text/javascript">
   var canvas = document.getElementById('canvas');
@@ -23,7 +23,7 @@
 
   //keeps track on goblin1 position
   var goblin1Image = new Image();
-  goblin1Image.src = 'images/goblin.png';
+  goblin1Image.src = 'images/boo.png';
   var goblin1 = {
     x: 400,
     y: 200,
@@ -33,7 +33,7 @@
   };
 
   var goblin2Image = new Image();
-  goblin2Image.src = 'images/goblin.png';
+  goblin2Image.src = 'images/boo.png';
   var goblin2 = {
     x: 350,
     y: 300,
@@ -43,7 +43,7 @@
   };
 
   var monsterImage = new Image();
-  monsterImage.src = 'images/monster.png';
+  monsterImage.src = 'images/yoshiegg.png';
   var monster = {
     x: 50,
     y: 50,
@@ -60,7 +60,7 @@
   var highScore = 0;
 
   var heroImage = new Image();
-  heroImage.src = 'images/hero.png';
+  heroImage.src = 'images/yoshi.png';
   //hero's starting position
   var hero = {
     x: 245,
